@@ -4,18 +4,18 @@ pipeline {
         stage('Install SonarQube Scanner') {
             steps {
                 script {
-                    // Install sonar-scanner with elevated privileges
+                    // Install sonar-scanner if not already installed
                     sh '''
                     if ! command -v sonar-scanner &>/dev/null; then
                         echo "SonarQube Scanner not found, installing..."
                         wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
                         unzip -o sonar-scanner-cli-4.6.2.2472-linux.zip
 
-                         // Example of a custom installation directory
-                        sh 'mkdir -p /var/jenkins_home/sonar-scanner'
-                        sh 'mv sonar-scanner-4.6.2.2472-linux /var/jenkins_home/sonar-scanner'
+                        // Custom installation directory
+                        mkdir -p /var/jenkins_home/sonar-scanner
+                        mv sonar-scanner-4.6.2.2472-linux /var/jenkins_home/sonar-scanner
                        
-                        sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
+                        sudo ln -s /var/jenkins_home/sonar-scanner/sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
                     else
                         echo "SonarQube Scanner already installed"
                     fi
