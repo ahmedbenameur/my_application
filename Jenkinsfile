@@ -7,7 +7,13 @@ pipeline {
     stages {
         stage('Check SonarQube Scanner') {
             steps {
-                sh 'which sonar-scanner'
+                script {
+            def sonarScannerPath = sh(script: 'which sonar-scanner', returnStdout: true).trim()
+            if (!sonarScannerPath) {
+                error "SonarQube Scanner is not installed or not in PATH."
+            }
+            echo "SonarQube Scanner found at: ${sonarScannerPath}"
+        }
             }
         }
 
