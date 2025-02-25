@@ -19,9 +19,18 @@ pipeline {
         
         stage('Scan') {
             steps {
-                withSonarQubeEnv(installationName: 'sq1') { 
-                    sh 'ls -l'  // Check if pom.xml exists
-                    sh 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                withSonarQubeEnv(installationName: 'sq1') {
+                    // Run SonarScanner on the extracted Java files
+                    script {
+                       
+
+                        sh """
+                        sonar-scanner \
+                        -Dsonar.projectKey=application \
+                        -Dsonar.sources=extracted_code/java \
+                        -Dsonar.host.url=http://localhost:9000/ \
+                     
+                        """
                 }
             }
         }
