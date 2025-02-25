@@ -13,24 +13,22 @@ pipeline {
 
         stage('Check') {
             steps {
-               sh ' python3 script.py '
+               sh 'python3 script.py'
             }
         }
         
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') {
-                    // Run SonarScanner on the extracted Java files
                     script {
-                       
-
+                        // Run SonarScanner on the extracted Java files
                         sh """
                         sonar-scanner \
                         -Dsonar.projectKey=application \
                         -Dsonar.sources=extracted_code/java \
                         -Dsonar.host.url=http://localhost:9000/ \
-                     
                         """
+                    }
                 }
             }
         }
