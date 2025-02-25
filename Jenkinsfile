@@ -3,15 +3,14 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-  
-}
-    stages {
 
+    stages {
         stage('Check SonarQube Scanner') {
-    steps {
-        sh 'which sonar-scanner'
-    }
-}
+            steps {
+                sh 'which sonar-scanner'
+            }
+        }
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/ahmedbenameur/my_application.git'
@@ -24,7 +23,7 @@ pipeline {
                sh 'python3 script.py'
             }
         }
-        
+
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') {
