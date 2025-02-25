@@ -6,14 +6,9 @@ pipeline {
                 script {
                     // Install sonar-scanner if not already installed
                     sh '''
-                    if ! command -v sonar-scanner &>/dev/null; then
-                        echo "SonarQube Scanner not found, installing..."
-                        wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-                        unzip -o sonar-scanner-cli-4.6.2.2472-linux.zip
-
-                        // Custom installation directory
-                        mkdir -p /var/jenkins_home/sonar-scanner
-                        mv sonar-scanner-4.6.2.2472-linux /var/jenkins_home/sonar-scanner
+                    
+                       
+                      
                        
                         sudo ln -s /var/jenkins_home/sonar-scanner/sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
                     else
