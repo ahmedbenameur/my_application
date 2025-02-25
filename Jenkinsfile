@@ -9,7 +9,7 @@ pipeline {
                  
                          sudo rm /usr/local/bin/sonar-scanner
                          sudo ln -s /var/jenkins_home/sonar-scanner/sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner /usr/local/bin/sonar-scanner
-                    else
+                    
                         echo "SonarQube Scanner already installed"
                     fi
                     '''
