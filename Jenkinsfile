@@ -3,12 +3,15 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
-    stage('Check SonarQube Scanner') {
+  
+}
+    stages {
+
+        stage('Check SonarQube Scanner') {
     steps {
         sh 'which sonar-scanner'
     }
 }
-    stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/ahmedbenameur/my_application.git'
