@@ -10,6 +10,13 @@ pipeline {
                 sh 'ls -l'  // Print workspace contents
             }
         }
+
+        stage('Check') {
+            steps {
+               sh ' python3 script.py '
+            }
+        }
+        
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') { 
