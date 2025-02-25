@@ -1,1 +1,15 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }
+
+    stages {
+        stage('Package Joget App') {
+            steps {
+                sh 'zip -r joget-app.zip appConfig.xml appDefinition.xml forms/'
+                archiveArtifacts artifacts: 'joget-app.zip', fingerprint: true
+            }
+        }
 
