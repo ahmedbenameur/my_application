@@ -8,8 +8,6 @@ pipeline {
                     sh '''
                     if ! command -v sonar-scanner &>/dev/null; then
                         echo "SonarQube Scanner not found, installing..."
-                        sudo apt-get update
-                        sudo apt-get install -y wget unzip
                         wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
                         unzip sonar-scanner-cli-4.6.2.2472-linux.zip
                         mv sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
