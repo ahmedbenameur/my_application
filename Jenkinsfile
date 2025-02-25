@@ -3,6 +3,11 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
     }
+    stage('Check SonarQube Scanner') {
+    steps {
+        sh 'which sonar-scanner'
+    }
+}
     stages {
         stage('Checkout') {
             steps {
